@@ -19,6 +19,10 @@ std::vector<std::string> ZenityFilePicker::buildCommandLine() {
     }
     if (mode == Mode::SAVE)
         cmd.emplace_back("--save");
+        if (!fileName.empty()) {
+            cmd.emplace_back("--filename");
+            cmd.emplace_back(fileName);
+        }
     if (!patterns.empty()) {
         cmd.emplace_back("--file-filter");
         std::string val;

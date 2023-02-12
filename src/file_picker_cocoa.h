@@ -6,6 +6,7 @@ class CocoaFilePicker : public FilePicker {
 
 private:
     std::string title;
+    std::string fileName;
     Mode mode;
     std::vector<std::string> patterns;
     std::string pickedFile;
@@ -13,6 +14,9 @@ private:
 public:
     void setTitle(std::string const& title) override {
         this->title = title;
+    }
+    void setFileName(std::string const& fileName) override {
+        this->fileName = fileName;
     }
 
     void setMode(Mode mode) override {

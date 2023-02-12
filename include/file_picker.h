@@ -14,6 +14,8 @@ public:
 
     virtual void setTitle(std::string const& title) = 0;
 
+    virtual void setFileName(std::string const& title) = 0;
+
     virtual void setMode(Mode mode) = 0;
 
     virtual void setFileNameFilters(std::vector<std::string> const& patterns) = 0;
