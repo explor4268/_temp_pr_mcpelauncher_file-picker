@@ -7,11 +7,11 @@
 #include <cstring>
 #include <errno.h>
 
-const std::string ZenityFilePicker::EXECUTABLE_PATH = "/usr/bin/zenity";
+const std::string ZenityFilePicker::EXECUTABLE_NAME = "zenity";
 
 std::vector<std::string> ZenityFilePicker::buildCommandLine() {
     std::vector<std::string> cmd;
-    cmd.emplace_back(EXECUTABLE_PATH);
+    cmd.emplace_back(EXECUTABLE_NAME);
     cmd.emplace_back("--file-selection");
     if (!title.empty()) {
         cmd.emplace_back("--title");
@@ -45,10 +45,6 @@ std::vector<const char*> ZenityFilePicker::convertToC(std::vector<std::string> c
 }
 
 bool ZenityFilePicker::show() {
-    struct stat sb;
-    if (stat(EXECUTABLE_PATH.c_str(), &sb))
-        throw std::runtime_error("Could not find zenity.\n\nTo be able to pick files, please install the `zenity` utility.");
-
     char ret[1024];
 
     int pipes[3][2];
@@ -76,8 +72,8 @@ bool ZenityFilePicker::show() {
         close(pipes[PIPE_STDIN][PIPE_READ]);
         close(pipes[PIPE_STDOUT][PIPE_READ]);
         close(pipes[PIPE_STDERR][PIPE_READ]);
-        int r = execv(argvc[0], (char**) argvc.data());
-        printf("Show: execv() error %i %s", r, strerror(errno));
+        int r = execvp(argvc[0], (char**) argvc.data());
+        printf("Show: execvp() error %i %s", r, strerror(errno));
         close(STDOUT_FILENO);
         close(STDERR_FILENO);
         close(STDIN_FILENO);

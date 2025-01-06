@@ -11,7 +11,7 @@ private:
     std::vector<std::string> patterns;
     std::string pickedFile;
 
-    static const std::string EXECUTABLE_PATH;
+    static const std::string EXECUTABLE_NAME;
 
     std::vector<std::string> buildCommandLine();
 
