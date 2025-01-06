@@ -45,13 +45,6 @@ std::vector<const char*> ZenityFilePicker::convertToC(std::vector<std::string> c
 }
 
 bool ZenityFilePicker::show() {
-    // no longer a static path, should be moved into the execvp() section
-    /*
-    struct stat sb;
-    if (stat(EXECUTABLE_PATH.c_str(), &sb))
-        throw std::runtime_error("Could not find zenity.\n\nTo be able to pick files, please install the `zenity` utility.");
-    */
-
     char ret[1024];
 
     int pipes[3][2];
